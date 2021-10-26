@@ -5,19 +5,15 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public enum Direction {
-    FORWARD,
-    BACKWARDS,
-    RIGHT,
-    LEFT;
+public class OptionsParser {
 
-    public static ArrayList<Direction> translateStringsToDirections(String[] args) {
+    public static ArrayList<MoveDirection> parse(String[] args) {
         return Arrays.stream(args)
                 .map(arg -> switch (arg) {
-                    case "f" -> Direction.FORWARD;
-                    case "b" -> Direction.BACKWARDS;
-                    case "r" -> Direction.RIGHT;
-                    case "l" -> Direction.LEFT;
+                    case "f", "forward" -> MoveDirection.FORWARD;
+                    case "b", "backward" -> MoveDirection.BACKWARD;
+                    case "r", "right" -> MoveDirection.RIGHT;
+                    case "l", "left" -> MoveDirection.LEFT;
                     default -> null;
                 })
                 .filter(Objects::nonNull)

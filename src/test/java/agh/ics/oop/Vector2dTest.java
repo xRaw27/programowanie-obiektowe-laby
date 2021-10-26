@@ -33,6 +33,7 @@ public class Vector2dTest {
         assertTrue(new Vector2d(3, -123).precedes(new Vector2d(3, -123)));
         assertTrue(new Vector2d(-19, -123).precedes(new Vector2d(0, 0)));
         assertTrue(new Vector2d(86, 763332).precedes(new Vector2d(86, 763333)));
+        assertFalse(new Vector2d(0, 0).precedes(new Vector2d(-19, -123)));
         assertFalse(new Vector2d(654, -723).precedes(new Vector2d(4321, -724)));
         assertFalse(new Vector2d(-43, 32).precedes(new Vector2d(-144, 649)));
     }

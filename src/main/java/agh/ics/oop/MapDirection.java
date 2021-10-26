@@ -1,15 +1,17 @@
 package agh.ics.oop;
 
 public enum MapDirection {
-    NORTH ("Północ"),
-    EAST ("Wschód"),
-    SOUTH ("Południe"),
-    WEST ("Zachód");
+    NORTH ("Północ", new Vector2d(0, 1)),
+    EAST ("Wschód", new Vector2d(1, 0)),
+    SOUTH ("Południe", new Vector2d(0, -1)),
+    WEST ("Zachód", new Vector2d(-1, 0));
 
     private final String stringValue;
+    private final Vector2d unitVector;
 
-    MapDirection(String stringValue) {
+    MapDirection(String stringValue, Vector2d unitVector) {
         this.stringValue = stringValue;
+        this.unitVector = unitVector;
     }
 
     public MapDirection next() {
@@ -21,12 +23,7 @@ public enum MapDirection {
     }
 
     public Vector2d toUnitVector() {
-        return switch (this) {
-            case NORTH -> new Vector2d(0, 1);
-            case EAST -> new Vector2d(1, 0);
-            case SOUTH -> new Vector2d(0, -1);
-            case WEST -> new Vector2d(-1, 0);
-        };
+        return this.unitVector;
     }
 
     @Override
