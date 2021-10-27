@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 public class World {
     static void run(ArrayList<MoveDirection> moveDirections, Animal animal) {
-        System.out.println("Start" + "\n");
-
         for (MoveDirection moveDirection : moveDirections) {
             System.out.println(moveDirection.getMessage());
 
@@ -13,8 +11,6 @@ public class World {
             animal.move(moveDirection);
             System.out.println(animal + "\n");
         }
-
-        System.out.println("Stop");
     }
 
     public static void main(String[] args) {

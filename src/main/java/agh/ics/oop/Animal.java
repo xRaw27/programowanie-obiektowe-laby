@@ -26,6 +26,10 @@ public class Animal {
         }
     }
 
+    public Boolean isPositionAndDirectionEqual(Vector2d p, MapDirection d) {
+        return (p.equals(this.position) && d.equals(this.direction));
+    }
+
     @Override
     public String toString() {
         return "position = " + position + ", direction = " + direction;
