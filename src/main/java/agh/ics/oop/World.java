@@ -1,26 +1,18 @@
 package agh.ics.oop;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class World {
-    static void run(ArrayList<MoveDirection> moveDirections, Animal animal) {
-        for (MoveDirection moveDirection : moveDirections) {
-            System.out.println(moveDirection.getMessage());
-            System.out.println(animal);
-
-            animal.move(moveDirection);
-            System.out.println(animal + "\n");
-        }
-    }
 
     public static void main(String[] args) {
-        Animal testAnimal = new Animal();
-        System.out.println(testAnimal + "\n");
+        List<MoveDirection> directions = OptionsParser.parse(args);
+        IWorldMap map = new RectangularMap(10, 5);
 
-        ArrayList<MoveDirection> moveDirections = OptionsParser.parse(new String[]{"r", "f", "f", "f"});
-        System.out.println(moveDirections + "\n");
+        List<Vector2d> positions = new ArrayList<>(Arrays.asList(new Vector2d(2,2), new Vector2d(3,4)));
 
-        run(moveDirections, testAnimal);
-        System.out.println(testAnimal + "\n");
+        IEngine engine = new SimulationEngine(directions, map, positions);
+        engine.run();
     }
 }
