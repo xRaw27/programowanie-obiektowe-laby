@@ -24,13 +24,14 @@ public class SimulationEngine implements IEngine{
     @Override
     public void run() {
         System.out.println(this.moveDirections);
+        System.out.println("Pozycja startowa");
         System.out.println(this.map);
         System.out.println("");
 
         if (!this.animals.isEmpty()) {
             int index = 0;
             for (MoveDirection moveDirection : moveDirections) {
-                System.out.println(moveDirection.getMessage());
+                System.out.println((index + 1) + " " + moveDirection.getMessage());
 
                 this.animals.get(index).move(moveDirection);
                 index = (index + 1) % this.animals.size();
