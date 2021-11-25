@@ -1,16 +1,13 @@
 package agh.ics.oop;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class GrassField extends AbstractWorldMap {
-    private final List<Grass> grassTufts = new ArrayList<>();
+    private final Map<Vector2d, Grass> grassTufts = new HashMap<>();
 
     public GrassField(int numberOfTufts) {
-        int size = (int)Math.sqrt(10 * numberOfTufts);
+        int size = (int) Math.sqrt(10 * numberOfTufts);
 
         Random randGenerator = new Random();
         Set<Integer> randSet = new LinkedHashSet<>();
@@ -19,7 +16,8 @@ public class GrassField extends AbstractWorldMap {
         }
 
         for (Integer x : randSet) {
-            this.grassTufts.add(new Grass(new Vector2d(x % (size + 1), x / (size + 1))));
+            Vector2d grassPosition = new Vector2d(x % (size + 1), x / (size + 1));
+            this.grassTufts.put(grassPosition, new Grass(grassPosition));
         }
     }
 
@@ -28,25 +26,18 @@ public class GrassField extends AbstractWorldMap {
         Object object = super.objectAt(position);
         if (object != null) return object;
 
-        for (Grass grassTuft : this.grassTufts) {
-            if (position.equals(grassTuft.getPosition())) return grassTuft;
-        }
-        return null;
+        return this.grassTufts.get(position);
     }
 
     @Override
     public String toString() {
-        this.bottomLeftCorner = this.animals.get(0).getPosition();
-        this.topRightCorner = this.animals.get(0).getPosition();
+        this.bottomLeftCorner = this.topRightCorner = this.grassTufts.keySet().iterator().next();
 
-        for (Animal animal : this.animals) {
-            this.bottomLeftCorner = this.bottomLeftCorner.lowerLeft(animal.getPosition());
-            this.topRightCorner = this.topRightCorner.upperRight(animal.getPosition());
-        }
-        for (Grass grassTuft : this.grassTufts) {
-            this.bottomLeftCorner = this.bottomLeftCorner.lowerLeft(grassTuft.getPosition());
-            this.topRightCorner = this.topRightCorner.upperRight(grassTuft.getPosition());
-        }
+        Stream.concat(this.animals.keySet().stream(), this.grassTufts.keySet().stream())
+                .forEach(position -> {
+                    this.bottomLeftCorner = this.bottomLeftCorner.lowerLeft(position);
+                    this.topRightCorner = this.topRightCorner.upperRight(position);
+                });
 
         return super.toString();
     }
