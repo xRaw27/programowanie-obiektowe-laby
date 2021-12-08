@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class SimulationEngineTest {
 
@@ -60,6 +61,16 @@ public class SimulationEngineTest {
 
         assertEquals(List.of(new Vector2d(0, 0)), engine3.getAnimalsPositions());
         assertEquals(List.of(MapDirection.WEST), engine3.getAnimalsDirections());
+
+//        Test 4
+        List<Vector2d> positions4 = new ArrayList<>(Arrays.asList(new Vector2d(4,2), new Vector2d(1,4), new Vector2d(5, 5), new Vector2d(1,4)));
+        List<MoveDirection> directions4 = new ArrayList<>(Arrays.asList(MoveDirection.LEFT, MoveDirection.LEFT));
+
+        IWorldMap map4 = new RectangularMap(10, 14);
+        IllegalArgumentException thrown4 = assertThrows(IllegalArgumentException.class, () -> {
+            SimulationEngine engine4 = new SimulationEngine(directions4, map4, positions4);
+        });
+        assertEquals("Cannot place animal at position: (1,4). This position is already occupied.", thrown4.getMessage());
     }
 
     @Test
@@ -112,6 +123,16 @@ public class SimulationEngineTest {
 
         assertEquals(List.of(new Vector2d(-2, -3)), engine3.getAnimalsPositions());
         assertEquals(List.of(MapDirection.WEST), engine3.getAnimalsDirections());
+
+//        Test 4
+        List<Vector2d> positions4 = new ArrayList<>(Arrays.asList(new Vector2d(4,2), new Vector2d(1,4), new Vector2d(5, 5), new Vector2d(1,4)));
+        List<MoveDirection> directions4 = new ArrayList<>(Arrays.asList(MoveDirection.LEFT, MoveDirection.LEFT));
+
+        IWorldMap map4 = new GrassField(20);
+        IllegalArgumentException thrown4 = assertThrows(IllegalArgumentException.class, () -> {
+            SimulationEngine engine4 = new SimulationEngine(directions4, map4, positions4);
+        });
+        assertEquals("Cannot place animal at position: (1,4). This position is already occupied.", thrown4.getMessage());
     }
 
 }

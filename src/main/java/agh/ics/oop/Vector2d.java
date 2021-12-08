@@ -44,6 +44,18 @@ public class Vector2d {
         return new Vector2d(-this.x, -this.y);
     }
 
+    public int compareByX(Vector2d other) {
+        if (this.x > other.x) return 1;
+        else if (this.x < other.x) return -1;
+        else return Integer.compare(this.y, other.y);
+    }
+
+    public int compareByY(Vector2d other) {
+        if (this.y > other.y) return 1;
+        else if (this.y < other.y) return -1;
+        else return Integer.compare(this.x, other.x);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (this == other)
