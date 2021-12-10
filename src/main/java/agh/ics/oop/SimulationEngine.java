@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SimulationEngine implements IEngine{
+public class SimulationEngine implements IEngine {
     private final IWorldMap map;
     private final List<MoveDirection> moveDirections;
     private final List<Animal> animals = new ArrayList<>();
