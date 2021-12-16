@@ -3,7 +3,7 @@ package agh.ics.oop;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Animal {
+public class Animal implements IMapElement {
     private Vector2d position;
     private MapDirection direction = MapDirection.NORTH;
 
@@ -53,6 +53,16 @@ public class Animal {
 
     public MapDirection getDirection() {
         return this.direction;
+    }
+
+    @Override
+    public String getLabel() {
+        return direction.getSymbol() + this.position;
+    }
+
+    @Override
+    public String getImageSrc() {
+        return direction.getImageSrc();
     }
 
     @Override

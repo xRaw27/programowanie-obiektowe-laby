@@ -37,10 +37,12 @@ public class SimulationEngine implements IEngine {
                 index = (index + 1) % this.animals.size();
 
                 System.out.println(this.map);
+
                 System.out.println("");
             }
         }
     }
+
 
     List<Vector2d> getAnimalsPositions() {
         return this.animals.stream()

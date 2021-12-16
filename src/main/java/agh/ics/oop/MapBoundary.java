@@ -6,6 +6,11 @@ import java.util.TreeSet;
 public class MapBoundary implements IPositionChangeObserver {
     private final SortedSet<Vector2d> mapElementVectorsSortedByX = new TreeSet<>(Vector2d::compareByX);
     private final SortedSet<Vector2d> mapElementVectorsSortedByY = new TreeSet<>(Vector2d::compareByY);
+    private final GrassField map;
+
+    public MapBoundary(GrassField map) {
+        this.map = map;
+    }
 
     public Vector2d getBottomLeftCorner() {
         return new Vector2d(this.mapElementVectorsSortedByX.first().x, this.mapElementVectorsSortedByY.first().y);
@@ -18,6 +23,8 @@ public class MapBoundary implements IPositionChangeObserver {
     public void addPositionVector(Vector2d position) {
         this.mapElementVectorsSortedByX.add(position);
         this.mapElementVectorsSortedByY.add(position);
+
+        this.map.mapBoundariesChanged();
     }
 
     @Override
@@ -27,5 +34,7 @@ public class MapBoundary implements IPositionChangeObserver {
 
         this.mapElementVectorsSortedByY.remove(newPosition);
         this.mapElementVectorsSortedByY.add(newPosition);
+
+        this.map.mapBoundariesChanged();
     }
 }

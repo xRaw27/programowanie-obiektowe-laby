@@ -1,6 +1,7 @@
 package agh.ics.oop;
 
 import agh.ics.oop.gui.App;
+import agh.ics.oop.gui.SimulationStage;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
@@ -11,10 +12,12 @@ public class SimulationEngineGUI implements IEngine, Runnable{
     private final IWorldMap map;
     private final List<MoveDirection> moveDirections;
     private final List<Animal> animals = new ArrayList<>();
+    private final SimulationStage gui;
 
-    public SimulationEngineGUI(List<MoveDirection> moveDirections, IWorldMap map, List<Vector2d> startingPositions) {
+    public SimulationEngineGUI(List<MoveDirection> moveDirections, IWorldMap map, List<Vector2d> startingPositions, SimulationStage gui) {
         this.map = map;
         this.moveDirections = moveDirections;
+        this.gui = gui;
 
         for (Vector2d startingPosition : startingPositions) {
             Animal animal = new Animal(map, startingPosition);
@@ -26,57 +29,35 @@ public class SimulationEngineGUI implements IEngine, Runnable{
 
     @Override
     public void run() {
-        System.out.println("test");
-
-        for (int i = 0; i < 10; i++) {
-
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-//            Platform.runLater(() -> {
-//                App.update("1");
-//            });
-
-        }
-
-
-//        App.
-//        System.out.println(this.moveDirections);
-//        System.out.println("Pozycja startowa");
 //        System.out.println(this.map);
 //        System.out.println("");
-//
-//        if (!this.animals.isEmpty()) {
-//            int index = 0;
-//            for (MoveDirection moveDirection : moveDirections) {
-//                try {
-//                    Thread.sleep(300);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
+
+        Platform.runLater(() -> {
+            this.gui.drawMap(((AbstractWorldMap)this.map).bottomLeftCorner, ((AbstractWorldMap)this.map).topRightCorner);
+        });
+
+
+        if (!this.animals.isEmpty()) {
+            int index = 0;
+            for (MoveDirection moveDirection : moveDirections) {
+                try {
+                    Thread.sleep(250);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
 //                System.out.println((index + 1) + " " + moveDirection.getMessage());
-//
-//                this.animals.get(index).move(moveDirection);
-//                index = (index + 1) % this.animals.size();
-//
+
+                this.animals.get(index).move(moveDirection);
+                index = (index + 1) % this.animals.size();
+
 //                System.out.println(this.map);
 //                System.out.println("");
-//            }
-//        }
-    }
 
-    List<Vector2d> getAnimalsPositions() {
-        return this.animals.stream()
-                .map(Animal::getPosition)
-                .collect(Collectors.toCollection(ArrayList::new));
-    }
-
-    List<MapDirection> getAnimalsDirections() {
-        return this.animals.stream()
-                .map(Animal::getDirection)
-                .collect(Collectors.toCollection(ArrayList::new));
+                Platform.runLater(() -> {
+                    this.gui.drawMap(((AbstractWorldMap)this.map).bottomLeftCorner, ((AbstractWorldMap)this.map).topRightCorner);
+                });
+            }
+        }
     }
 }

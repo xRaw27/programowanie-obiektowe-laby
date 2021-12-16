@@ -2,102 +2,79 @@ package agh.ics.oop.gui;
 
 import agh.ics.oop.*;
 import javafx.application.Application;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.*;
 
 public class App extends Application {
-    private Stage primaryStage;
+//    private Stage primaryStage;
+//    private GridPane grid;
+//    private IWorldMap map;
+//    private IEngine engine;
+//    private final Map<String, Image> loadedImages = new HashMap<>();
 
     public static void main(String[] args) {
         Application.launch(args);
     }
 
-    @Override
-    public void init() throws Exception {
-        super.init();
-
-//        String[] args = getParameters().getRaw().toArray(new String[0]);
+//    @Override
+//    public void init() throws Exception {
+//        super.init();
 //
-//        System.out.println(Arrays.toString(args));
+////        String[] args = getParameters().getRaw().toArray(new String[0]);
+////        System.out.println(Arrays.toString(args));
+////
+////        try {
+////            List<MoveDirection> directions = OptionsParser.parse(args);
+////            this.map = new GrassField(20);
+////
+////            List<Vector2d> positions = new ArrayList<>(Arrays.asList(new Vector2d(5,5), new Vector2d(7,6)));
+////            this.engine = new SimulationEngineGUI(directions, this.map, positions, this);
+////
+////        } catch(IllegalArgumentException ex) {
+////            System.out.println(ex.getMessage());
+////            System.exit(0);
+////        }
 //
-//        try {
-//            List<MoveDirection> directions = OptionsParser.parse(args);
-//            IWorldMap map = new GrassField(10);
-//
-//            List<Vector2d> positions = new ArrayList<>(Arrays.asList(new Vector2d(5,5), new Vector2d(7,6)));
-//
-//            IEngine engine = new SimulationEngineGUI(directions, map, positions);
-//            Thread engineThread = new Thread((Runnable)engine);
-//            engineThread.start();
-//
-//        } catch(IllegalArgumentException ex) {
-//            System.out.println(ex.getMessage());
-//        }
-
-    }
+//    }
 
     @Override
     public void start(Stage primaryStage) {
-        this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("JavaFX App");
+        primaryStage.setTitle("JavaFX App");
 
-//        GridPane gridPane = createGrid();
-        Label label1 = new Label("start");
+        TextField directionsTextField = new TextField();
+        Button startButton = new Button("Start");
+        VBox vbox = new VBox(20, directionsTextField, startButton);
+        vbox.setAlignment(Pos.CENTER);
+        VBox.setMargin(directionsTextField, new Insets(0, 20, 0, 20));
 
-        this.primaryStage.setScene(new Scene(label1, 400, 400));
+        startButton.setOnAction(actionEvent -> {
+            try {
+                SimulationStage simulationStage = new SimulationStage(directionsTextField.getText().split(" "));
+                simulationStage.show();
+                simulationStage.startSimulation();
 
-        this.primaryStage.show();
+            } catch(IllegalArgumentException ex) {
+                System.out.println(ex.getMessage());
+            }
 
-//        gridPane.getColumnConstraints().add(new ColumnConstraints(30));
-//        gridPane.getColumnConstraints().remove(0);
+        });
+
+        primaryStage.setScene(new Scene(vbox, 400, 200));
+        primaryStage.show();
     }
 
-    public void update(String s) {
-        Label label = new Label(s);
-        this.primaryStage.setScene(new Scene(label, 400, 400));
-    }
-
-//    private GridPane createGrid() {
-//        GridPane grid = new GridPane();
-//        grid.setGridLinesVisible(true);
-//
-//        ColumnConstraints cc = new ColumnConstraints(30);
-////        cc.setHalignment(HPos.CENTER);
-////
-//        RowConstraints rc = new RowConstraints(30);
-////        rc.setValignment(VPos.CENTER);
-//
-//        List<VBox> cells = new ArrayList<>();
-//
-//        for (int i = 0; i < 10; i++) {
-//            grid.getColumnConstraints().add(cc);
-//            grid.getRowConstraints().add(rc);
-//        }
-//
-//        for (int i = 0; i < 10; i++) {
-//            for (int j = 0; j < 10; j++) {
-//                VBox vbox = new VBox(new Label("*"));
-//                vbox.setAlignment(Pos.CENTER);
-//
-//                cells.add(vbox);
-//                grid.add(vbox, i, j, 1, 1);
-//            }
-//        }
-//
-//        cells.get(14).getChildren().clear();
-//        cells.get(14).getChildren().add(new Label("A"));
-//
-//        return grid;
-//    }
-
-    public void testt() {
-        System.out.println("test");
-    }
 }

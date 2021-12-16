@@ -4,11 +4,11 @@ import java.util.*;
 
 public class GrassField extends AbstractWorldMap {
     private final Map<Vector2d, Grass> grassTufts = new HashMap<>();
-    private final MapBoundary mapBoundary = new MapBoundary();
+    private final MapBoundary mapBoundary = new MapBoundary(this);
     private final int size;
 
     public GrassField(int numberOfTufts) {
-        this.size = (int) Math.sqrt(10 * numberOfTufts);
+        this.size = (int) Math.sqrt(4 * numberOfTufts);
 
         Random randGenerator = new Random();
         Set<Integer> randSet = new LinkedHashSet<>();
@@ -36,6 +36,11 @@ public class GrassField extends AbstractWorldMap {
         System.out.println("Trawa zjedzona na pozycji " + oldPosition + "\nNowa trawa wyrosła na pozycji " + newPosition);
         this.grassTufts.put(newPosition, new Grass(newPosition));
         this.mapBoundary.positionChanged(oldPosition, newPosition);
+    }
+
+    public void mapBoundariesChanged() {
+        this.bottomLeftCorner = this.mapBoundary.getBottomLeftCorner();
+        this.topRightCorner = this.mapBoundary.getTopRightCorner();
     }
 
     @Override
@@ -68,9 +73,6 @@ public class GrassField extends AbstractWorldMap {
 
     @Override
     public String toString() {
-        this.bottomLeftCorner = this.mapBoundary.getBottomLeftCorner();
-        this.topRightCorner = this.mapBoundary.getTopRightCorner();
-
         return super.toString();
     }
 }
