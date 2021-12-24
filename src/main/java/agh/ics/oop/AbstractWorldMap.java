@@ -1,10 +1,12 @@
 package agh.ics.oop;
 
+import agh.ics.oop.animal.Animal;
+
 import java.util.HashMap;
 import java.util.Map;
 
 abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver {
-    private final MapVisualizer mapVisualizer = new MapVisualizer(this);
+//    private final MapVisualizer mapVisualizer = new MapVisualizer(this);
 
     protected Vector2d bottomLeftCorner;
     protected Vector2d topRightCorner;
@@ -44,6 +46,7 @@ abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver {
 
     @Override
     public String toString() {
-        return this.mapVisualizer.draw(this.bottomLeftCorner, this.topRightCorner);
+//        return this.mapVisualizer.draw(this.bottomLeftCorner, this.topRightCorner);
+        return "";
     }
 }

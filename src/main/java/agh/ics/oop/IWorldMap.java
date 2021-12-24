@@ -1,5 +1,7 @@
 package agh.ics.oop;
 
+import agh.ics.oop.animal.Animal;
+
 /**
  * The interface responsible for interacting with the map of the world.
  * Assumes that Vector2d and MoveDirection classes are defined.

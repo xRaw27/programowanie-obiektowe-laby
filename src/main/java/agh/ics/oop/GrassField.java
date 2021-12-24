@@ -1,5 +1,7 @@
 package agh.ics.oop;
 
+import agh.ics.oop.animal.Animal;
+
 import java.util.*;
 
 public class GrassField extends AbstractWorldMap {

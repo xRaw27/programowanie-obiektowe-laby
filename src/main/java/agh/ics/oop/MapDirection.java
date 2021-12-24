@@ -1,14 +1,16 @@
 package agh.ics.oop;
 
+import java.util.Random;
+
 public enum MapDirection {
-//    NORTH ("Północ", new Vector2d(0, 1), "▲"),
-//    EAST ("Wschód", new Vector2d(1, 0), "▶"),
-//    SOUTH ("Południe", new Vector2d(0, -1), "▼"),
-//    WEST ("Zachód", new Vector2d(-1, 0), "◀");
-    NORTH ("Północ", new Vector2d(0, 1), "^", "src/main/resources/animal_up.png"),
-    EAST ("Wschód", new Vector2d(1, 0), ">", "src/main/resources/animal_right.png"),
-    SOUTH ("Południe", new Vector2d(0, -1), "v", "src/main/resources/animal_down.png"),
-    WEST ("Zachód", new Vector2d(-1, 0), "<", "src/main/resources/animal_left.png");
+    NORTH ("North", new Vector2d(0, 1), "N", "src/main/resources/animal_up.png"),
+    NORTHEAST ("Northeast", new Vector2d(1, 1), "NE", "src/main/resources/animal_up.png"),
+    EAST ("East", new Vector2d(1, 0), "E", "src/main/resources/animal_right.png"),
+    SOUTHEAST ("Southeast", new Vector2d(1, -1), "SE", "src/main/resources/animal_right.png"),
+    SOUTH ("South", new Vector2d(0, -1), "S", "src/main/resources/animal_down.png"),
+    SOUTHWEST ("Southwest", new Vector2d(-1, -1), "SW", "src/main/resources/animal_down.png"),
+    WEST ("West", new Vector2d(-1, 0), "W", "src/main/resources/animal_left.png"),
+    NORTHWEST ("Northwest", new Vector2d(-1, 1), "NW", "src/main/resources/animal_left.png");
 
     private final String stringValue;
     private final Vector2d unitVector;
@@ -22,13 +24,22 @@ public enum MapDirection {
         this.imageSrc = imageSrc;
     }
 
-    public MapDirection next() {
-        return MapDirection.values()[(this.ordinal() + 1) % 4];
+    public MapDirection rotate(Integer rotation) {
+        return MapDirection.values()[(this.ordinal() + rotation) % 8];
     }
 
-    public MapDirection previous() {
-        return MapDirection.values()[(this.ordinal() + 3) % 4];
+    public static MapDirection randomDirection() {
+        Random random = new Random();
+        return MapDirection.values()[random.nextInt(8)];
     }
+
+//    public MapDirection next() {
+//        return MapDirection.values()[(this.ordinal() + 1) % 4];
+//    }
+//
+//    public MapDirection previous() {
+//        return MapDirection.values()[(this.ordinal() + 3) % 4];
+//    }
 
     public Vector2d toUnitVector() {
         return this.unitVector;
