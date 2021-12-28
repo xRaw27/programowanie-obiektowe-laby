@@ -32,4 +32,15 @@ public class Rectangle {
     public boolean inRectangle(Vector2d position) {
         return position.precedes(this.topRightCorner) && position.follows(this.bottomLeftCorner);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other)
+            return true;
+        if (other == null || getClass() != other.getClass())
+            return false;
+        Rectangle that = (Rectangle) other;
+
+        return this.bottomLeftCorner.equals(that.bottomLeftCorner) && this.topRightCorner.equals(that.topRightCorner);
+    }
 }

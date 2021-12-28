@@ -17,4 +17,13 @@ public class MapDirectionTest {
         assertEquals(MapDirection.WEST, MapDirection.WEST.rotate(8));
         assertEquals(MapDirection.NORTHWEST, MapDirection.SOUTH.rotate(3));
     }
+
+    @Test
+    public void toUnitVectorTest() {
+        assertEquals(new Vector2d(-1, 0), MapDirection.WEST.toUnitVector());
+        assertEquals(new Vector2d(0, -1), MapDirection.SOUTH.toUnitVector());
+        assertEquals(new Vector2d(1, -1), MapDirection.SOUTHEAST.toUnitVector());
+        assertEquals(new Vector2d(-1, 1), MapDirection.NORTHWEST.toUnitVector());
+    }
+
 }
