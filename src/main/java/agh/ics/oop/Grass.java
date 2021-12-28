@@ -1,19 +1,15 @@
 package agh.ics.oop;
 
 public class Grass implements IMapElement{
-    private final Vector2d position;
 
-    public Grass(Vector2d position) {
-        this.position = position;
+    private final int plantEnergy;
+
+    public Grass(int plantEnergy) {
+        this.plantEnergy = plantEnergy;
     }
 
-    public Vector2d getPosition() {
-        return this.position;
-    }
-
-    @Override
-    public String getLabel() {
-        return "Grass";
+    public int getPlantEnergy() {
+        return this.plantEnergy;
     }
 
     @Override
@@ -22,7 +18,13 @@ public class Grass implements IMapElement{
     }
 
     @Override
-    public String toString() {
-        return "*";
+    public double getProgressBarStatus() {
+        return -1;
+    }
+
+    @Override
+    public boolean isAnimal() {
+        return false;
     }
 }
+

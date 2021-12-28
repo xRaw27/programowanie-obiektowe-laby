@@ -3,7 +3,6 @@ package agh.ics.oop.map;
 import agh.ics.oop.Rectangle;
 import agh.ics.oop.Vector2d;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -39,7 +38,6 @@ public class RandomPositionGenerator {
 
     private Vector2d randomPositionInRectangles(List<Rectangle> rectangles, int[] areas, int sumOfAreas) {
         int randNumber = (new Random()).nextInt(sumOfAreas);
-        System.out.println("rand number: " + randNumber);
 
         int i = 0;
         while (randNumber >= areas[i]) {
@@ -48,13 +46,11 @@ public class RandomPositionGenerator {
         }
 
         Rectangle rectangle = rectangles.get(i);
-        System.out.println(randNumber + "  " + rectangle.getWidth());
         return rectangle.bottomLeftCorner.add(new Vector2d(randNumber % rectangle.getWidth(), randNumber / rectangle.getWidth()));
     }
 
     public Vector2d randomUnoccupiedPositionInRectangles(List<Rectangle> rectangles, int sumOfAreas, int numberOfOccupiedCells) {
         int[] areas = rectangles.stream().map(Rectangle::getArea).mapToInt(x -> x).toArray();
-        System.out.println(Arrays.toString(areas));
 
         if (numberOfOccupiedCells < IMap.BOUNDARY_OCCUPIED_RATIO * sumOfAreas) {
             Vector2d randPosition = randomPositionInRectangles(rectangles, areas, sumOfAreas);

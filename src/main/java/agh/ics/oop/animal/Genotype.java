@@ -29,8 +29,28 @@ public class Genotype {
         Collections.sort(this.genes);
     }
 
+    public Genotype(Genotype genotype) {
+        this.genes = new ArrayList<>(genotype.genes);
+    }
+
     public int randomGene() {
         return this.genes.get((new Random()).nextInt(32));
+    }
+
+    @Override
+    public int hashCode() {
+        return this.genes.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other)
+            return true;
+        if (other == null || getClass() != other.getClass())
+            return false;
+
+        Genotype that = (Genotype) other;
+        return this.genes.equals(that.genes);
     }
 
     @Override

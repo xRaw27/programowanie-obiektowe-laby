@@ -24,12 +24,36 @@ public class Vector2d {
         return this.x >= other.x && this.y >= other.y;
     }
 
+    public boolean hasSmallerX(Vector2d other) {
+        return this.x < other.x;
+    }
+
+    public boolean hasGreaterX(Vector2d other) {
+        return this.x > other.x;
+    }
+
+    public boolean hasSmallerY(Vector2d other) {
+        return this.y < other.y;
+    }
+
+    public boolean hasGreaterY(Vector2d other) {
+        return this.y > other.y;
+    }
+
     public Vector2d upperRight(Vector2d other) {
         return new Vector2d(Math.max(this.x, other.x), Math.max(this.y, other.y));
     }
 
     public Vector2d lowerLeft(Vector2d other) {
         return new Vector2d(Math.min(this.x, other.x), Math.min(this.y, other.y));
+    }
+
+    public Vector2d upperLeft(Vector2d other) {
+        return new Vector2d(Math.min(this.x, other.x), Math.max(this.y, other.y));
+    }
+
+    public Vector2d lowerRight(Vector2d other) {
+        return new Vector2d(Math.max(this.x, other.x), Math.min(this.y, other.y));
     }
 
     public Vector2d add(Vector2d other) {

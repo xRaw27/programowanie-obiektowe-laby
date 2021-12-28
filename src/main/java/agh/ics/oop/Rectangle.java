@@ -29,11 +29,7 @@ public class Rectangle {
         }
     }
 
-    @Override
-    public String toString() {
-        return "Rectangle{" +
-                "bottomLeftCorner=" + bottomLeftCorner +
-                ", topRightCorner=" + topRightCorner +
-                '}';
+    public boolean inRectangle(Vector2d position) {
+        return position.precedes(this.topRightCorner) && position.follows(this.bottomLeftCorner);
     }
 }
