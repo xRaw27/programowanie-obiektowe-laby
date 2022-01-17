@@ -30,11 +30,11 @@ public class Genotype {
     }
 
     public Genotype(Genotype genotype) {
-        this.genes = new ArrayList<>(genotype.genes);
+        this.genes = new ArrayList<>(genotype.genes);   // czy jest potrzeba kopiować? chyba nigdzie Pan nie modyfikuje genów?
     }
 
     public int randomGene() {
-        return this.genes.get((new Random()).nextInt(32));
+        return this.genes.get((new Random()).nextInt(32));  // nowy obiekt co wywołanie
     }
 
     @Override

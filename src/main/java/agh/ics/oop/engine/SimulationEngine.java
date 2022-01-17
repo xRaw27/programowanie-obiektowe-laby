@@ -40,7 +40,7 @@ public class SimulationEngine implements IEngine, Runnable {
         this.plantEnergy = plantEnergy;
         this.grassSpawnEachDay = grassSpawnEachDay;
         this.refreshTime = refreshTime;
-        this.isMagic = isMagic;
+        this.isMagic = isMagic; // może lepiej by to było załatwić dziedziczeniem?
 
         this.randomPlace(initialNumberOfAnimals);
         this.statistics.setInitialValues(this.numberOfSpawnedAnimals, this.numberOfSpawnedAnimals * this.startEnergy);
@@ -68,7 +68,7 @@ public class SimulationEngine implements IEngine, Runnable {
         this.positionsContainingAnimals.clear();
 
         for (Iterator<Animal> iterator = this.animals.iterator(); iterator.hasNext(); ) {
-            Animal animal = iterator.next();
+            Animal animal = iterator.next();    // a tego by się nie dało do nagłówka pętli wrzucić?
 
             if (animal.getEnergy() < this.moveEnergy) {
                 animal.die();

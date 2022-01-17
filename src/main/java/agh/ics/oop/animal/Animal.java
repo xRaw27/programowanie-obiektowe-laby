@@ -45,7 +45,7 @@ public class Animal implements IMapElement, Comparable<Animal> {
         this.descendantOfObservedAnimal = animal1.descendantOfObservedAnimal || animal2.descendantOfObservedAnimal;
     }
 
-    public Animal(int id, IMap map, Vector2d initialPosition, int startEnergy, int epochOfBirth, Animal animal) {
+    public Animal(int id, IMap map, Vector2d initialPosition, int startEnergy, int epochOfBirth, Animal animal) {   // DRY
         this.id = id;
         this.map = map;
         this.genotype = new Genotype(animal.genotype);
@@ -78,7 +78,7 @@ public class Animal implements IMapElement, Comparable<Animal> {
                 Vector2d provisionalNewPosition = this.position.add(this.direction.toUnitVector());
                 this.updatePosition(provisionalNewPosition);
             }
-            case 4 -> {
+            case 4 -> { // za miesiąc będzie Pan pamiętał czemu akurat 4?
                 Vector2d provisionalNewPosition = this.position.subtract(this.direction.toUnitVector());
                 this.updatePosition(provisionalNewPosition);
             }

@@ -17,7 +17,7 @@ public enum MapDirection {
     private final String stringValue;
     private final Vector2d unitVector;
     private final String symbol;
-    private final String imageSrc;
+    private final String imageSrc;  // dobrze by to było przenieść do GUI
 
     MapDirection(String stringValue, Vector2d unitVector, String symbol, String imageSrc) {
         this.stringValue = stringValue;
@@ -31,7 +31,7 @@ public enum MapDirection {
     }
 
     public static MapDirection randomDirection() {
-        Random random = new Random();
+        Random random = new Random();   // nowy obiekt co wywołanie
         return MapDirection.values()[random.nextInt(8)];
     }
 

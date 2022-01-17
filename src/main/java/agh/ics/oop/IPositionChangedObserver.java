@@ -5,6 +5,6 @@ import agh.ics.oop.animal.Animal;
 
 public interface IPositionChangedObserver {
 
-    void positionChanged(Animal animal, Vector2d oldPosition, Vector2d newPosition);
+    void positionChanged(Animal animal, Vector2d oldPosition, Vector2d newPosition);    // jest sens przekazywać nową pozycję, jeśli przekazujemy całe zwierzę?
 
 }

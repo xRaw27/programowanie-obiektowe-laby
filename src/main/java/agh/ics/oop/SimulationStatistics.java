@@ -38,7 +38,7 @@ public class SimulationStatistics implements IAnimalDiedObserver {
 
     public void newEpoch(int epoch) {
         this.currentEpoch = epoch;
-        this.genotypes.clear();
+        this.genotypes.clear(); // nie lepiej usuwać/dodawać tylko jak zwierzę umiera/rodzi się?
     }
 
     public void updateSumOfEpochsLived(int epochsLived) {

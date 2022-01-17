@@ -24,7 +24,7 @@ public class Vector2d {
         return this.x >= other.x && this.y >= other.y;
     }
 
-    public boolean hasSmallerX(Vector2d other) {
+    public boolean hasSmallerX(Vector2d other) {    // nie lepszy byłby komparator?
         return this.x < other.x;
     }
 
